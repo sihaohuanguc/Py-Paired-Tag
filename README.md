@@ -15,7 +15,7 @@ In this way, your environment will be ready to install and run PPT. If you want 
 # Download
 You could download the package by the following command.
 ```bash
-git clone (Placeholder)()()()()()
+git clone https://github.com/sihaohuanguc/Py-Paired-Tag.git
 ```
 Then go to the folder with the `setup.py` file. And run
 ```bash
