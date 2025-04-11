@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# -*- coding: utf-8
+
+import argparse
+from ppt.combine3 import combine3
+from ppt.convert2 import convert2
+from ppt.rmdup2 import rmdup2
+from ppt.bam2Mtx2 import bam2Mtx2
+
+p=argparse.ArgumentParser(description="Py-Paired-Tag (PPT) is the python version of Paired-Tag pipeline.")
+p.add_argument("Mode",type=str,help="Running mode. Should be one from 'combine3', 'convert2', 'rmdup2' and 'bam2Mtx2'.")
+p.add_argument("--read1","-1",type=str,help="Read 1 fastq file in .gz format.")
+p.add_argument("--read2","-2",type=str,help="Read 2 fastq file in .gz format.")
+p.add_argument("--input","-i",type=str,help="Your input file of the step.")
+p.add_argument("--out_prefix","-p",type=str,help="Your output prefix of the step.")
+p.add_argument("--reference","-r",type=str,help="Your reference file of the step.")
+
+args=p.parse_args()
+
+if args.Mode:
+    run_type=args.Mode
+
+    if run_type=="combine3":
+        if args.read1 and args.read2 and args.out_prefix:
+            if not args.read1.endswith(".gz") and not args.read2.endswith(".gz"):
+                print("Please provide gzipped files for combine3.")
+                exit(1)
+            combine3(args.read1, args.read2, args.out_prefix)
+        else:
+            print("Please provide read1, read2 and out_prefix for combine3.")
+
+    elif run_type=="convert2":
+        if args.input and args.out_prefix:
+            convert2(args.input, args.out_prefix)
+        else:
+            print("Please provide input and out_prefix for convert2.")
+
+    elif run_type=="rmdup2":
+        if args.input and args.out_prefix:
+            rmdup2(args.input, args.out_prefix)
+        else:
+            print("Please provide input and out_prefix for rmdup2.")
+    
+    elif run_type=="bam2Mtx2":
+        if args.reference and args.input and args.out_prefix:
+            bam2Mtx2(args.reference, args.input, args.out_prefix)
+        else:
+            print("Please provide reference, input and out_prefix for bam2Mtx2.")
+    
+    else:
+        print("Please provide a valid mode. Should be one from 'combine3', 'convert2', 'rmdup2' and 'bam2Mtx2'.")
