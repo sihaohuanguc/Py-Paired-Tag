@@ -88,8 +88,8 @@ class read_processor:
         self.dock = 4
 
         # Type determination
-        #  DNA TC
-		#  RNA AG
+        #  DNA AG
+		#  RNA TC
         cur_s = 0
         b1 = self.rawline[86 + t]
         b2 = self.rawline[91 + t]
@@ -101,7 +101,7 @@ class read_processor:
             cur_s += 1
         if b2 == "C":
             cur_s -= 1
-        if cur_s > 0:         # DNA is TC, but is this the opposite???
+        if cur_s > 0:         
             self.type = "d"
         elif cur_s < 0:
             self.type = "r"

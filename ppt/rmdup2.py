@@ -19,7 +19,7 @@ def rmdup2(bam, out_prefix):
         fields = line.decode('utf-8').strip().split('\t')
         chr_name = fields[2]
         pos = int(fields[3])
-        umi = fields[0][-19:]  # this include both CB ID and the UMI   # change this if format is different !!!
+        umi = fields[0][-19:]  # this include both CB ID and the UMI 
         
         hash_map[chr_name][pos][umi] = True
         dupcounts[chr_name][pos][umi] += 1
@@ -42,7 +42,6 @@ def rmdup2(bam, out_prefix):
     cmd_out = f"samtools view -b - -o {rmdup_bam}"
     out_process = subprocess.Popen(cmd_out, shell=True, stdin=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
-
     for line in in_process.stdout:
         line = line.decode('utf-8')
         if line.startswith('@'):
@@ -51,7 +50,7 @@ def rmdup2(bam, out_prefix):
             fields = line.strip().split('\t')
             chr_name = fields[2]
             pos = int(fields[3])
-            umi = fields[0][-19:]        # change this if format is different !!!
+            umi = fields[0][-19:]        
             
             if not hash_map[chr_name][pos][umi]:  # it's not the first time you see this UMI
                 continue

@@ -78,8 +78,8 @@ def bam2Mtx2(ref, bam, out_prefix):
             if sl_pos < pss or sl_pos > pse:
                 continue
 
-            cell_id = readname[-19:-11]     # this needs to be changed if you don't store CB ID in the title!!!!
-            umi = readname[-10:]           # this too!!!
+            cell_id = readname[-19:-11]     
+            umi = readname[-10:]          
 
             if cell_id not in hash_data:
                 hash_data[cell_id] = {}
@@ -89,7 +89,6 @@ def bam2Mtx2(ref, bam, out_prefix):
             hash_data[cell_id][gene_id][umi] = True   # finally, the number of such True item will be the UMI count, will be a huge number!!!
             genelist[gene_id] = 0
             celllist[cell_id] = 0
-
 
     process.stdout.close()
     process.wait()
